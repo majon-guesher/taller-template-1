@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Taller de Vibe Coding para Madrijim
 
-## Getting Started
+Acá vas a buildear tu material. Vas a tener una idea, y la IA te va a ayudar a hacerla realidad y subirla a internet. Sin código, sin dramatismo.
 
-First, run the development server:
+## Cómo funciona
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. Contale a la IA qué querés hacer
+2. La IA codea y pushea
+3. En ~30 segundos está online en `https://taller-XX.majon.xyz`
+4. Mirá, decidí qué cambiar, y vuelta a empezar
+
+Después de cada cambio hay que commitear y pushear para que se deploye:
+```
+git add -A && git commit -m "lo que cambiaste" && git push
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Qué podés buildear
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Candado virtual, sobre cerrado, ruleta, generador de grupos, cuenta regresiva, buchón, dado digital, pistas que se desbloquean con tiempo, trivia... o lo que se te ocurra. La IA te va a proponer cosas, vos decidís.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Regla de oro
 
-## Learn More
+Vos pensás la idea. La IA codea. No tenés que saber escribir código — solo tener clara la peulá que querés armar.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Si algo se rompe o la IA no lo resuelve, llamá al tallerista.
