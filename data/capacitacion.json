@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "eyebrow": "Capacitacion para madrijim",
+    "title": "Vibe coding: subir el piso",
+    "subtitle": "Una web-presentacion para contar el taller caminando por bloques, ideas y casos concretos.",
+    "duration": "90 min",
+    "audience": "QLT y madrijim",
+    "promise": "Salir con algo funcionando online y una pregunta nueva sobre IA y hadraja."
+  },
+  "principles": [
+    "Producto antes que tecnica",
+    "Practica antes que teoria perfecta",
+    "IA como herramienta, no reemplazo",
+    "El madrij piensa; la compu ejecuta",
+    "Shipear chico, mirar, ajustar"
+  ],
+  "cards": [
+    {
+      "label": "Idea fuerza",
+      "title": "No hace falta ser mecanico para manejar",
+      "body": "Entender el motor ayuda, pero hoy el objetivo es conducir: decidir que queremos que pase y lograr que exista."
+    },
+    {
+      "label": "Dato para decir",
+      "title": "La dificultad bajo de lugar",
+      "body": "Antes la barrera era escribir codigo. Ahora la barrera principal es pensar producto, contexto y criterio."
+    },
+    {
+      "label": "Frase de taller",
+      "title": "Subir el piso",
+      "body": "No buscamos reemplazar creatividad. Buscamos que ideas que antes quedaban en PDF hoy puedan ser juego, sala, tablero o web."
+    },
+    {
+      "label": "Criterio",
+      "title": "Un agente no es un chat con casco",
+      "body": "El chat responde. El agente puede recorrer archivos, editar, probar, equivocarse, corregir y volver con algo concreto."
+    }
+  ],
+  "slides": [
+    {
+      "number": "0",
+      "minutes": "10 min",
+      "title": "Presentacion y clima",
+      "goal": "Que el grupo entienda que no viene a aprender programacion abstracta: viene a construir materiales posibles.",
+      "beats": [
+        "Quien es cada uno y que tan cerca se siente de lo tecnico.",
+        "Romper el hielo: que material siempre quisieron hacer y nunca hicieron.",
+        "Instalar una promesa concreta: hoy algo termina online."
+      ],
+      "note": "Arrancar liviano. La confianza es parte del contenido."
+    },
+    {
+      "number": "1",
+      "minutes": "20 min",
+      "title": "IA basica, sin mistica",
+      "goal": "Dar vocabulario minimo para que QLT pueda pedir mejor, leer mejor y no asustarse.",
+      "beats": [
+        "Machine learning: esto no aparecio ayer, cambio la escala y la interfaz.",
+        "LLMs: predicen la continuacion razonable segun contexto.",
+        "Contexto: brief, materiales, restricciones, tono y ejemplos.",
+        "Motor y nafta: el modelo importa, pero lo que le das tambien.",
+        "Agente vs chat: de responder a hacer."
+      ],
+      "note": "La analogia del auto va aca: saber manejar primero, mecanica despues."
+    },
+    {
+      "number": "1b",
+      "minutes": "10 min",
+      "title": "Que estamos construyendo",
+      "goal": "Bajar ansiedad frente a archivos, proyectos, GitHub y Vercel.",
+      "beats": [
+        "App web vs documento, imagen o PDF.",
+        "Archivo y proyecto: muchas piezas chicas haciendo una experiencia.",
+        "GitHub como Drive de programacion.",
+        "Vercel como la vidriera publica.",
+        "Lo importante hoy: producto claro y usuario claro."
+      ],
+      "note": "Decir explicitamente: no hace falta entender todo lo que se ve en pantalla."
+    },
+    {
+      "number": "2",
+      "minutes": "15 min",
+      "title": "Hadraja e IA",
+      "goal": "Abrir criterio: la IA amplifica al madrij, no decide por el madrij.",
+      "beats": [
+        "Herramienta, no reemplazo del vinculo ni del criterio educativo.",
+        "Lo de hoy no es todo: es una puerta de entrada.",
+        "Mostrar ejemplos: salas de escape, videos, voces, materiales interactivos.",
+        "Preguntar: que gana una peula cuando se vuelve explorable."
+      ],
+      "note": "Aca conviene debatir un poco, no vender tecnologia."
+    },
+    {
+      "number": "3",
+      "minutes": "5 min",
+      "title": "Pipeline y grupos",
+      "goal": "Que todos sepan cual es el camino de trabajo antes de tocar compus.",
+      "beats": [
+        "Idea clara: para quien y que tiene que pasar.",
+        "Pedido chico al agente.",
+        "Cambio, build, push y deploy.",
+        "Grupos rapidos con roles: quien piensa, quien mira usuario, quien prueba."
+      ],
+      "note": "Ritmo de cocina: poco discurso, manos a la masa."
+    },
+    {
+      "number": "4",
+      "minutes": "30 min",
+      "title": "Ejercicio: hacer una instancia",
+      "goal": "Convertir una idea de hadraja en una web usable, aunque sea en version minima.",
+      "beats": [
+        "Elegir uno de los cuatro casos.",
+        "Definir usuario, momento de uso y accion principal.",
+        "Buildear la version mas chica que ya sirve.",
+        "Mirarla online y ajustar una cosa."
+      ],
+      "note": "Si aparece alguien muy tecnico, subir complejidad sin correr al grupo."
+    },
+    {
+      "number": "5",
+      "minutes": "10 min",
+      "title": "Cierre y relevamiento",
+      "goal": "Cerrar con orgullo de producto y levantar datos para los proximos talleres.",
+      "beats": [
+        "Mini muestra de apps.",
+        "Que les gusto, que les sorprendio, que parecio facil o dificil.",
+        "Interes por aprender debajo del capot.",
+        "Interes por seguir usando herramientas y debatir IA/hadraja."
+      ],
+      "note": "Celebrar el deploy: ya existe en el mundo."
+    }
+  ],
+  "cases": [
+    {
+      "name": "Candado",
+      "tag": "Sala de escape",
+      "level": "Medio",
+      "idea": "Tres carpetas bloqueadas que liberan pistas para descubrir quien se perdio y recuperar su historia.",
+      "ship": "Pantalla con carpetas, codigos y pistas desbloqueables.",
+      "twist": "Una pista rara: ticket de Grido a las 23:00."
+    },
+    {
+      "name": "Ierushalaim 4x3",
+      "tag": "Jeopardy + Tabu",
+      "level": "Rapido",
+      "idea": "Tablero de 12 espacios con valores 100, 200 y 300 sobre historia, cultura, tradiciones y geografia.",
+      "ship": "Tablero clickeable con preguntas, respuestas y puntaje por equipo.",
+      "twist": "Los 300 puntos se ganan haciendo adivinar sin palabras prohibidas."
+    },
+    {
+      "name": "Pantano",
+      "tag": "Juego de riesgo",
+      "level": "Medio",
+      "idea": "Un contador de infeccion sube solo. Los desafios lo bajan y representan acciones para secar el pantano.",
+      "ship": "Medidor en vivo, botones de desafios y estado final cuando llega a cero.",
+      "twist": "Una sopa fisica con letras hebreas que hay que filtrar."
+    },
+    {
+      "name": "Impostor lunar",
+      "tag": "Dificil",
+      "level": "Alto",
+      "idea": "Cada janij recibe una palabra de la Luna; uno recibe otra y no sabe que es impostor.",
+      "ship": "Carga de jugadores, pantalla privada de rol, ronda de palabras y votacion final.",
+      "twist": "Votan repartiendo rayitos de sol entre sospechosos."
+    }
+  ],
+  "survey": [
+    "Que tanto te gusto y te intereso la clase.",
+    "Cuanto esperabas que la clase fuera asi.",
+    "Que tan util te parece lo que viste.",
+    "Que tan facil te parecio.",
+    "Te gustaria aprender que pasa debajo de lo que hiciste hoy.",
+    "Te gustaria usar mas estas herramientas en el taller.",
+    "Te gustaria debatir sobre hadraja e IA.",
+    "Comentarios adicionales."
+  ]
+}
