@@ -1,34 +1,16 @@
 {
   "victims": [
     {
-      "name": "Anne Frank",
-      "info": "Anne Frank escribio un diario en Amsterdam mientras se escondia de los nazis. Murio en Bergen-Belsen en 1945. Tenia quince anos. Su diario se convirtio en uno de los libros mas leidos del mundo.",
-      "born": 1929,
-      "died": 1945
-    },
-    {
-      "name": "Janusz Korczak",
-      "info": "Janusz Korczak fue educador y pediatra. Dirigio un orfanato en el ghetto de Varsovia. Cuando los nazis deportaron a los ninos, el fue con ellos a Treblinka en 1942. No abandono a sus chicos.",
-      "born": 1878,
-      "died": 1942
-    },
-    {
-      "name": "Hannah Szenes",
-      "info": "Hannah Szenes fue poetisa y paracaidista. Nacio en Hungria, inmigro a Palestina. Volvio a Europa para rescatar judios. Capturada, torturada, fusilada en 1944. Tenia veintitres anos.",
-      "born": 1921,
-      "died": 1944
-    },
-    {
-      "name": "Elie Wiesel",
-      "info": "Elie Wiesel sobrevivio Auschwitz y Buchenwald. Escribio La Noche sobre su experiencia. Gano el Nobel de la Paz en 1986. Dedicó su vida a la memoria y la lucha contra la indiferencia.",
-      "born": 1928,
-      "died": 2016
-    },
-    {
-      "name": "Irena Sendler",
-      "info": "Irena Sendler rescato mas de dos mil quinientos ninos del ghetto de Varsovia. Los escondio en cajas, maletas y ambulancias. Los nazis la torturaron pero no rompio su secreto. Vivio hasta los noventaocho anos.",
-      "born": 1910,
-      "died": 2008
+      "name": "Alice Newman (Sala Karpman)",
+      "born": "14 de mayo, 1928 - Varsovia, Polonia",
+      "fragments": [
+        "Jugaba en el patio de nuestra casa en Varsovia. De repente escuche gritos. Soldados nazis golpeaban al hijo de una mujer. Quedo sangrando. Ahi empezo todo. Todos los judios teniamos que irnos.",
+        "Meti mis cosas en un cochecito de muneca. Nos obligaron a entrar al ghetto de Varsovia. Habia muy poca comida. Muchos dormian en la calle, o estaban muertos. Un dia mi madre me llevo a la puerta del ghetto y me empujo hacia afuera.",
+        "Tenes que irte. Andá derecho y dobla a la derecha, me dijo. Prometo venir a buscarte despues de la guerra. Encontre la casa de una amiga catolica y me escondio inmediatamente.",
+        "No estornudes, no tosas, no te muevas. Me llevaron a un sacerdote catolico para conseguir documentos falsos. Me enseno a rezar Santa Maria madre de Dios. Yo no sabia quien era Maria.",
+        "Fui de lugar en lugar. Finalmente, despues de la guerra, me mandaron a Nueva Zelanda. Me sentia abandonada. Cuando alguien me ponia una mano en el hombro, significaba todo. En los 60, cuando entendi que mi madre no venia, llore durante dias.",
+        "Anos despues, escuche a David Irving negar la Shoá en la radio. Fui a su conferencia en la universidad. Me pare y dije: Yo estuve ahi, vos no. Irving fue denigrante y seguridad me trato mal. Lo peor que les paso es que tuvieron que pelar papas, dijo Irving."
+      ]
     }
   ]
 }
