@@ -17,6 +17,10 @@ function charToNum(char: string): number {
   return 0
 }
 
+function encodeWord(word: string): string {
+  return word.split('').map(c => { const n = charToNum(c); return n > 0 ? String(n) : c }).join(' ')
+}
+
 function flattenFragments(fragments: string[]): string[] {
   const words: string[] = []
   fragments.forEach(frag => {
@@ -25,6 +29,10 @@ function flattenFragments(fragments: string[]): string[] {
     })
   })
   return words
+}
+
+function stripPunctuation(word: string): string {
+  return word.replace(/[^a-zA-ZáéíóúñÑ]/g, '').toLowerCase()
 }
 
 const allWords = flattenFragments(victim.fragments)
@@ -42,6 +50,8 @@ function getFragmentBounds(fragments: string[]): { start: number; end: number }[
 
 const fragmentBounds = getFragmentBounds(victim.fragments)
 
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+
 export default function Home() {
   const [currentWordIdx, setCurrentWordIdx] = useState(0)
   const [input, setInput] = useState('')
@@ -55,11 +65,8 @@ export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const currentWord = allWords[currentWordIdx] || ''
-  const expectedNums = useMemo(() => {
-    return currentWord.split('').map(c => charToNum(c)).filter(n => n > 0)
-  }, [currentWord])
-
-  const expectedInput = useMemo(() => expectedNums.join(' '), [expectedNums])
+  const cleanWord = useMemo(() => stripPunctuation(currentWord), [currentWord])
+  const encodedWord = useMemo(() => encodeWord(currentWord), [currentWord])
 
   const currentFragmentIdx = useMemo(() => {
     for (let i = 0; i < fragmentBounds.length; i++) {
@@ -70,31 +77,26 @@ export default function Home() {
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
-    const normalized = input.trim().replace(/\s+/g, ' ')
-    const inputNums = normalized.split(' ').map(n => parseInt(n, 10))
-    const isCorrect = inputNums.length === expectedNums.length && inputNums.every((n, i) => n === expectedNums[i])
-
-    if (isCorrect) {
+    if (input.trim().toLowerCase() === cleanWord.toLowerCase()) {
       setSuccessFlash(true)
       setError(false)
       const newCompleted = new Set(completedWords)
       newCompleted.add(currentWordIdx)
       setCompletedWords(newCompleted)
 
-      setCompletedFragments(prev => {
-        const next = new Set(prev)
-        for (let i = 0; i < fragmentBounds.length; i++) {
-          let allWordsDone = true
-          for (let j = fragmentBounds[i].start; j < fragmentBounds[i].end; j++) {
-            if (!newCompleted.has(j) && j !== currentWordIdx) allWordsDone = false
-          }
-          if (allWordsDone && currentWordIdx + 1 >= fragmentBounds[i].end) next.add(i)
+      const nextFragments = new Set(completedFragments)
+      for (let i = 0; i < fragmentBounds.length; i++) {
+        let allDone = true
+        for (let j = fragmentBounds[i].start; j < fragmentBounds[i].end; j++) {
+          if (!newCompleted.has(j)) allDone = false
         }
-        if (currentWordIdx + 1 === allWords.length) {
-          setAllDone(true)
-        }
-        return next
-      })
+        if (allDone) nextFragments.add(i)
+      }
+      setCompletedFragments(nextFragments)
+
+      if (currentWordIdx >= allWords.length - 1) {
+        setAllDone(true)
+      }
 
       setTimeout(() => {
         setSuccessFlash(false)
@@ -102,19 +104,17 @@ export default function Home() {
           setCurrentWordIdx(prev => prev + 1)
           setInput('')
         }
-      }, 250)
+      }, 300)
     } else {
       setError(true)
       setShakeInput(true)
       setTimeout(() => setShakeInput(false), 400)
       setTimeout(() => setError(false), 1500)
     }
-  }, [input, expectedNums, currentWordIdx, completedWords])
+  }, [input, cleanWord, currentWordIdx, completedWords, completedFragments])
 
   useEffect(() => {
-    if (started && inputRef.current) {
-      inputRef.current.focus()
-    }
+    if (started && inputRef.current) inputRef.current.focus()
   }, [started, currentWordIdx])
 
   const handleStart = () => {
@@ -124,7 +124,26 @@ export default function Home() {
 
   const progressPct = Math.round((completedWords.size / allWords.length) * 100)
 
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  const revealedText = useMemo(() => {
+    const words: string[] = []
+    allWords.forEach((w, i) => {
+      if (completedWords.has(i)) {
+        words.push(w)
+      } else if (i === currentWordIdx) {
+        words.push('▓▓▓')
+      } else {
+        words.push('· · ·')
+      }
+    })
+    return fragmentBounds.map((bounds, fi) => {
+      return victim.fragments[fi].split(/\s+/).map((_, wi) => {
+        const idx = bounds.start + wi
+        if (completedWords.has(idx)) return allWords[idx]
+        if (idx === currentWordIdx) return '▓▓▓'
+        return '· · ·'
+      }).join(' ')
+    }).join('\n\n')
+  }, [completedWords, currentWordIdx])
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#00ff41] font-mono overflow-hidden relative select-none">
@@ -137,7 +156,7 @@ export default function Home() {
         <header className="border-b border-[#00ff41]/30 px-4 py-2 flex items-center justify-between text-xs shrink-0">
           <div className="flex items-center gap-3">
             <span className="tracking-[0.3em] font-bold text-[#00ff41]">CANDADO DIGITAL</span>
-            <span className="text-[#00ff41]/30">SHOÁ — ARCHIVO CLASIFICADO</span>
+            <span className="text-[#00ff41]/30">SHOÁ — DESCIFRAR</span>
           </div>
           <div className="flex items-center gap-4">
             <div className="w-32 h-1.5 bg-[#00ff41]/10 rounded-full overflow-hidden">
@@ -152,7 +171,7 @@ export default function Home() {
             const done = completedFragments.has(i)
             const current = i === currentFragmentIdx
             return (
-              <div key={i} className={`flex items-center gap-1 shrink-0 ${current ? 'animate-pulse' : ''}`}>
+              <div key={i} className={`flex items-center gap-1 shrink-0 ${current && !done ? 'animate-pulse' : ''}`}>
                 <span className={`text-sm ${done ? 'text-[#00ff41]' : current ? 'text-[#00ff41]/60' : 'text-[#00ff41]/20'}`}>
                   {done ? '🔓' : '🔒'}
                 </span>
@@ -163,7 +182,7 @@ export default function Home() {
             )
           })}
           <span className="ml-auto text-[10px] text-[#00ff41]/30">
-            {completedWords.size}/{allWords.length} palabras
+            {completedWords.size}/{allWords.length}
           </span>
         </div>
 
@@ -178,9 +197,9 @@ export default function Home() {
               </p>
               <div className="border border-[#00ff41]/20 rounded p-4 mb-6 text-left text-[#00ff41]/70 text-xs">
                 <p className="mb-2 text-[#00ff41] font-bold">CÓMO FUNCIONA</p>
-                <p className="mb-1">La página te muestra una <span className="text-[#00ff41]">palabra</span></p>
-                <p className="mb-1">Tenés que escribirla en <span className="text-[#00ff41]">números</span> usando A=1, B=2, C=3... Z=26</p>
-                <p className="mb-3">Separados por espacios. Ejemplo: <span className="text-[#00ff41]">MAL → 13 1 12</span></p>
+                <p className="mb-1">La página te muestra <span className="text-[#00ff41]">números</span> como <span className="text-[#00ff41]">10 21 7 1 2 1</span></p>
+                <p className="mb-1">Tenés que escribir la <span className="text-[#00ff41]">palabra</span> que corresponde: <span className="text-[#00ff41]">jugaba</span></p>
+                <p className="mb-3">Cada número = posición de la letra: A=1, B=2, C=3... Z=26</p>
                 <div className="flex flex-wrap gap-1 pt-2 border-t border-[#00ff41]/10">
                   {alphabet.map(letter => (
                     <span key={letter} className="text-[10px] text-[#00ff41]/40">
@@ -213,92 +232,58 @@ export default function Home() {
             </div>
           </div>
         ) : (
-          <div className="flex-1 flex flex-col items-center justify-center gap-6 px-4">
-            <div className="text-[#00ff41]/30 text-xs tracking-wider text-center">
-              FRAGMENTO {currentFragmentIdx + 1} DE {victim.fragments.length} — PALABRA {currentWordIdx + 1} DE {allWords.length}
+          <div className="flex-1 flex flex-col">
+            <div className="flex-1 overflow-y-auto p-4 text-[#00ff41]/30 text-xs leading-relaxed whitespace-pre-wrap hidden md:block">
+              {revealedText}
             </div>
 
-            <div className={`text-5xl md:text-7xl text-center font-bold tracking-wider transition-all duration-200 ${successFlash ? 'text-[#00ff41] scale-110' : 'text-[#00ff41]'}`}>
-              {currentWord}
-            </div>
+            <div className="border-t border-[#00ff41]/30 bg-[#0d0d0d] p-6 shrink-0 flex flex-col items-center gap-4">
+              <div className="text-[#00ff41]/30 text-[10px] tracking-wider text-center">
+                FRAGMENTO {currentFragmentIdx + 1} — PALABRA {currentWordIdx + 1}
+              </div>
 
-            <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col items-center gap-3">
-              <div className={`w-full transition-all duration-300 ${shakeInput ? 'animate-none' : ''}`}
-                style={shakeInput ? { animation: 'shake 0.4s ease-in-out' } : {}}>
+              <div className={`text-3xl md:text-5xl text-center font-bold tracking-[0.3em] transition-all duration-200 ${successFlash ? 'scale-110 text-[#00ff41]' : 'text-[#00ff41]'}`}>
+                {encodedWord}
+              </div>
+
+              <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col items-center gap-3">
                 <input
                   ref={inputRef}
                   type="text"
                   value={input}
                   onChange={e => setInput(e.target.value)}
-                  placeholder={expectedNums.map(() => '_').join(' ')}
-                  className={`w-full bg-[#001a00] border-2 text-center text-xl tracking-[0.3em] py-3 px-4 outline-none font-mono placeholder:text-[#00ff41]/15 ${
-                    error ? 'border-red-500 text-red-400' : 'border-[#00ff41]/40 text-[#00ff41]'
+                  placeholder="Escribí la palabra..."
+                  className={`w-full bg-[#001a00] border-2 text-center text-xl tracking-[0.2em] py-3 px-4 outline-none font-mono ${
+                    error ? 'border-red-500 text-red-400 placeholder:text-red-400/20'
+                    : 'border-[#00ff41]/40 text-[#00ff41] placeholder:text-[#00ff41]/15'
                   } focus:border-[#00ff41] focus:shadow-[0_0_20px_rgba(0,255,65,0.15)]`}
                   autoComplete="off"
                   autoCapitalize="off"
+                  spellCheck={false}
                 />
+
+                {error && (
+                  <p className="text-red-400 text-xs tracking-wider">
+                    NO ES ESA PALABRA — A=1, B=2, C=3... Z=26
+                  </p>
+                )}
+
+                <button type="submit" className="border border-[#00ff41]/40 text-[#00ff41] px-6 py-2 text-xs tracking-[0.3em] hover:bg-[#00ff41]/10 active:bg-[#00ff41]/20 transition-colors">
+                  DESCIFRAR
+                </button>
+              </form>
+
+              <div className="flex flex-wrap justify-center gap-1 mt-1">
+                {alphabet.map(letter => (
+                  <span key={letter} className="text-[9px] text-[#00ff41]/25">
+                    {letter}={letter.charCodeAt(0) - 64}
+                  </span>
+                ))}
               </div>
-
-              {error && (
-                <p className="text-red-400 text-xs tracking-wider">
-                  INCORRECTO — cada letra vale su posición: A=1, B=2, C=3...
-                </p>
-              )}
-
-              <button type="submit" className="border border-[#00ff41]/40 text-[#00ff41] px-6 py-2 text-xs tracking-[0.3em] hover:bg-[#00ff41]/10 transition-colors">
-                VERIFICAR
-              </button>
-            </form>
-
-            <div className="flex flex-wrap justify-center gap-x-2 gap-y-0.5 mt-2 max-w-2xl">
-              {currentWord.toUpperCase().split('').map((letter, i) => {
-                const num = charToNum(letter)
-                if (num === 0) return null
-                const inputNums = input.trim().split(/\s+/).map(n => parseInt(n, 10))
-                const inputNum = inputNums[i]
-                const filled = inputNum !== undefined && !isNaN(inputNum)
-                const correct = filled && inputNum === num
-                const wrong = filled && inputNum !== num
-                return (
-                  <div key={i} className="flex flex-col items-center">
-                    <span className={`text-lg font-bold ${correct ? 'text-[#00ff41]' : wrong ? 'text-red-400' : 'text-[#00ff41]'}`}>
-                      {letter}
-                    </span>
-                    <span className={`text-[10px] h-3 ${
-                      correct ? 'text-[#00ff41]/60' : wrong ? 'text-red-400/60' : 'text-[#00ff41]/20'
-                    }`}>
-                      {filled ? (correct ? '✓' : '✗') : '·'}
-                    </span>
-                  </div>
-                )
-              })}
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-1 mt-4 pt-4 border-t border-[#00ff41]/10">
-              {alphabet.map(letter => (
-                <span key={letter} className="text-[9px] text-[#00ff41]/30 px-0.5">
-                  {letter}={letter.charCodeAt(0) - 64}
-                </span>
-              ))}
             </div>
           </div>
         )}
-
-        <footer className="border-t border-[#00ff41]/20 px-4 py-1 text-[10px] text-[#00ff41]/30 flex justify-between shrink-0">
-          <span>A=1 B=2 C=3 ... Z=26 — Escribí los números separados por espacios</span>
-          <span>Alice Newman — Varsovia, 1928</span>
-        </footer>
       </div>
-
-      <style jsx>{`
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          20% { transform: translateX(-8px); }
-          40% { transform: translateX(8px); }
-          60% { transform: translateX(-4px); }
-          80% { transform: translateX(4px); }
-        }
-      `}</style>
     </div>
   )
 }
