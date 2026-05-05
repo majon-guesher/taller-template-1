@@ -2,7 +2,7 @@
   "meta": {
     "eyebrow": "Capacitacion para madrijim",
     "title": "Vibe coding: subir el piso",
-    "subtitle": "Una web-presentacion para contar el taller caminando por bloques, ideas y casos concretos.",
+    "subtitle": "Una web para presentar ideas, no para leer diapositivas.",
     "duration": "90 min",
     "audience": "QLT y madrijim",
     "promise": "Salir con algo funcionando online y una pregunta nueva sobre IA y hadraja."
@@ -41,11 +41,11 @@
       "number": "0",
       "minutes": "10 min",
       "title": "Presentacion y clima",
-      "goal": "Que el grupo entienda que no viene a aprender programacion abstracta: viene a construir materiales posibles.",
+      "goal": "Hoy no venimos a estudiar codigo. Venimos a hacer materiales que existan.",
       "beats": [
-        "Quien es cada uno y que tan cerca se siente de lo tecnico.",
-        "Romper el hielo: que material siempre quisieron hacer y nunca hicieron.",
-        "Instalar una promesa concreta: hoy algo termina online."
+        "Quien sos y que tan tecnico te sentis.",
+        "Que material siempre quisiste hacer.",
+        "Hoy algo termina online."
       ],
       "note": "Arrancar liviano. La confianza es parte del contenido."
     },
@@ -53,13 +53,13 @@
       "number": "1",
       "minutes": "20 min",
       "title": "IA basica, sin mistica",
-      "goal": "Dar vocabulario minimo para que QLT pueda pedir mejor, leer mejor y no asustarse.",
+      "goal": "La IA no es magia: es contexto, prediccion y criterio.",
       "beats": [
-        "Machine learning: esto no aparecio ayer, cambio la escala y la interfaz.",
-        "LLMs: predicen la continuacion razonable segun contexto.",
-        "Contexto: brief, materiales, restricciones, tono y ejemplos.",
-        "Motor y nafta: el modelo importa, pero lo que le das tambien.",
-        "Agente vs chat: de responder a hacer."
+        "Machine learning no aparecio ayer.",
+        "Un LLM predice continuidad razonable.",
+        "Contexto: brief, materiales, tono, limites.",
+        "Motor y nafta: modelo + lo que le das.",
+        "Chat responde. Agente hace."
       ],
       "note": "La analogia del auto va aca: saber manejar primero, mecanica despues."
     },
@@ -67,13 +67,13 @@
       "number": "1b",
       "minutes": "10 min",
       "title": "Que estamos construyendo",
-      "goal": "Bajar ansiedad frente a archivos, proyectos, GitHub y Vercel.",
+      "goal": "Una app web es un material vivo, no un PDF con botones.",
       "beats": [
-        "App web vs documento, imagen o PDF.",
-        "Archivo y proyecto: muchas piezas chicas haciendo una experiencia.",
-        "GitHub como Drive de programacion.",
-        "Vercel como la vidriera publica.",
-        "Lo importante hoy: producto claro y usuario claro."
+        "Documento: se mira.",
+        "App: pasa algo.",
+        "Proyecto: muchas piezas chicas.",
+        "GitHub guarda.",
+        "Vercel muestra al mundo."
       ],
       "note": "Decir explicitamente: no hace falta entender todo lo que se ve en pantalla."
     },
@@ -81,12 +81,12 @@
       "number": "2",
       "minutes": "15 min",
       "title": "Hadraja e IA",
-      "goal": "Abrir criterio: la IA amplifica al madrij, no decide por el madrij.",
+      "goal": "La IA amplifica al madrij. No reemplaza hadraja.",
       "beats": [
-        "Herramienta, no reemplazo del vinculo ni del criterio educativo.",
-        "Lo de hoy no es todo: es una puerta de entrada.",
-        "Mostrar ejemplos: salas de escape, videos, voces, materiales interactivos.",
-        "Preguntar: que gana una peula cuando se vuelve explorable."
+        "El vinculo no se automatiza.",
+        "El criterio educativo sigue siendo nuestro.",
+        "Salas, videos, voces, juegos, tableros.",
+        "Que gana una peula cuando se vuelve explorable."
       ],
       "note": "Aca conviene debatir un poco, no vender tecnologia."
     },
@@ -94,12 +94,13 @@
       "number": "3",
       "minutes": "5 min",
       "title": "Pipeline y grupos",
-      "goal": "Que todos sepan cual es el camino de trabajo antes de tocar compus.",
+      "goal": "El pipeline es simple: idea, pedido chico, deploy, feedback.",
       "beats": [
-        "Idea clara: para quien y que tiene que pasar.",
-        "Pedido chico al agente.",
-        "Cambio, build, push y deploy.",
-        "Grupos rapidos con roles: quien piensa, quien mira usuario, quien prueba."
+        "Para quien es.",
+        "Que tiene que pasar.",
+        "Pedido chico.",
+        "Mirar online.",
+        "Cambiar una cosa."
       ],
       "note": "Ritmo de cocina: poco discurso, manos a la masa."
     },
@@ -107,12 +108,13 @@
       "number": "4",
       "minutes": "30 min",
       "title": "Ejercicio: hacer una instancia",
-      "goal": "Convertir una idea de hadraja en una web usable, aunque sea en version minima.",
+      "goal": "Elegir una instancia y hacer la version mas chica que ya se pueda jugar.",
       "beats": [
-        "Elegir uno de los cuatro casos.",
-        "Definir usuario, momento de uso y accion principal.",
-        "Buildear la version mas chica que ya sirve.",
-        "Mirarla online y ajustar una cosa."
+        "Elegir caso.",
+        "Definir jugador.",
+        "Definir accion principal.",
+        "Buildear chico.",
+        "Probar online."
       ],
       "note": "Si aparece alguien muy tecnico, subir complejidad sin correr al grupo."
     },
@@ -120,12 +122,13 @@
       "number": "5",
       "minutes": "10 min",
       "title": "Cierre y relevamiento",
-      "goal": "Cerrar con orgullo de producto y levantar datos para los proximos talleres.",
+      "goal": "Cerrar con algo online y datos para decidir que taller viene despues.",
       "beats": [
-        "Mini muestra de apps.",
-        "Que les gusto, que les sorprendio, que parecio facil o dificil.",
-        "Interes por aprender debajo del capot.",
-        "Interes por seguir usando herramientas y debatir IA/hadraja."
+        "Mini muestra.",
+        "Que gusto.",
+        "Que sorprendio.",
+        "Que parecio facil.",
+        "Que quieren seguir aprendiendo."
       ],
       "note": "Celebrar el deploy: ya existe en el mundo."
     }
