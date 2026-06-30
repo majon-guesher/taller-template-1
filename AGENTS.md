@@ -18,7 +18,7 @@ El taller es corto. Todos se tienen que llevar algo entregable y funcionando onl
 - Vercel ya conectado al repo: cada push a main deploya solo
 - URL de producción: `https://taller-XX.majon.xyz` (reemplazar XX por número de compu)
 - Dominio personalizado en Vercel
-- Sin base de datos. Datos read-only en `/data` como JSON
+- Base de datos: Postgres con Neon, ya configurado en Vercel (`DATABASE_URL` viene del entorno). También `/data/*.json` para cosas chicas read-only
 - Branch única: main. No hay branches, no hay PRs
 - `node_modules` ya instalado, primer deploy ya verde
 
@@ -70,15 +70,17 @@ Pedido → cambio chico → push automático → URL → "fijate y decime qué c
 - Datos fijos en `/data/*.json`, leídos desde server components
 - Imports con alias `@/` (ej: `import { Button } from "@/components/ui/button"`)
 
-## Datos: solo read-only en /data
+## Base de datos
 
-- Los datos viven en `/data/*.json` y se editan commiteando al repo
-- Si el alumno pide "guardar datos de visitantes" (form, contador, lista que crece): explicar que en este taller los datos son read-only
-- Alternativas dentro del scope cuando alguien quiere "que me lleguen los datos":
-  - `mailto:` link
-  - Link a WhatsApp con mensaje pre-armado (`https://wa.me/...`)
-- No instalar libs de DB, no configurar Supabase/KV/Postgres aunque el alumno insista
-- Si el dato lo edits el alumno: editar el JSON, commit, push
+- Postgres con Neon, ya configurado en Vercel. `DATABASE_URL` viene del entorno — no hace falta configurar nada ni pedir secretos
+- Consultas SQL directas. Opciones válidas:
+  - `@neondatabase/serverless` (serverless, ideal para edge y route handlers)
+  - `pg` o `postgres` (driver normal, para conexiones pool)
+- Preferir SQL directo sobre ORMs. Si el alumno quiere un ORM, `drizzle` es la opción más liviana; evitar `prisma` salvo necesidad clara
+- Server components pueden leer la DB directo. Para mutaciones o lógica con eventos, usar server actions o route handlers en `app/api/...`
+- `/data/*.json` sigue disponible para cosas chicas y read-only que no justifiquen una tabla
+- Si el alumno quiere "que le lleguen los datos" sin armar backend: `mailto:` o link a WhatsApp (`https://wa.me/...`) siguen siendo alternativas rápidas
+- Si el dato lo edits el alumno a mano y es chico: editar el JSON, commit, push. Si crece o necesita escritura desde la app: tabla en Postgres
 
 ## Instalar librerías y componentes
 
@@ -94,16 +96,17 @@ Pedido → cambio chico → push automático → URL → "fijate y decime qué c
 - `nanoid`, `slugify` (utilidades)
 - `embla-carousel-react` (carouseles)
 - `recharts` (gráficos, si el alumno pide visualizar datos)
+- `@neondatabase/serverless`, `pg`, `postgres` (drivers de Postgres para Neon)
+- `drizzle-orm` + `drizzle-kit` (ORM liviano, si el alumno lo pide)
 
 Después de instalar: mencionar en una línea qué se agregó y seguir. Ej: "Le sumé framer-motion para que la entrada sea mejor"
 
 **Prohibido — frenar y avisar al mejanej (tutor):**
-- DBs: `prisma`, `drizzle`, `@supabase/*`, `@vercel/kv`, `@vercel/postgres`, `mongodb`
 - Auth: `next-auth`, `@clerk/*`, `@supabase/auth-*`
 - Pagos: `stripe`, `mercadopago`
 - Mails: `resend`, `nodemailer`, `@sendgrid/*`
 - APIs con keys: OpenAI, Anthropic SDK, etc.
-- Cualquier cosa que requiera env vars con secretos
+- Cualquier cosa que requiera nuevas env vars con secretos (la DB ya está configurada, no cuenta)
 
 **Mensaje cuando aparece un pedido prohibido:**
 
@@ -122,13 +125,12 @@ Después de instalar: mencionar en una línea qué se agregó y seguir. Ej: "Le 
 - No tocar `next.config.ts`, `tsconfig.json`, `package.json` salvo necesidad real
 - No borrar `CLAUDE.md`, `README.md`, ni archivos del scaffold base
 - No correr `gh auth login`, `vercel login`, ni nada que rompa la auth pre-configurada
-- No agregar DB ni servicios externos con API keys
+- No agregar servicios externos con API keys nuevas (la DB ya está configurada, no hace falta tocarla)
 - No correr `npm run dev` salvo pedido explícito del alumno
 
 ## Cuándo frenar y avisar al tallerista
 
 - Pedidos de auth, pagos, mails transaccionales, IA con API keys
-- Pedidos de DB real con escritura
 - Errores de deploy que no resuelven con un fix obvio en 1-2 intentos
 - Conflictos de git que no se resuelven con `git pull --rebase`
 - Cualquier comando que pida credenciales que no están en la compu
