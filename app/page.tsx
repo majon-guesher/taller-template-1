@@ -1,12 +1,9 @@
 export default function Home() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-      <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-        Acá arranca tu idea
+    <main className="flex flex-1 items-center bg-[#f4f0e6] px-6 py-16 sm:px-12">
+      <h1 className="max-w-6xl text-[clamp(3.5rem,10vw,9rem)] font-black leading-[0.9] tracking-[-0.06em] text-[#171713]">
+        Lista para el taller de hoy! (25/08/2026)
       </h1>
-      <p className="mt-4 max-w-md text-lg text-muted-foreground">
-        Contale a la IA qué querés buildear y la subimos online.
-      </p>
     </main>
   );
 }
